@@ -10,6 +10,7 @@ namespace GRIDCITY
         #region Fields
         public BuildingProfile myProfile;
         private GameObject treePrefab;
+       public BuildingProfile TreeProfile; //scriptable object
         public int recursionLevel = -1;
         private int maxLevel = 3;
         private CityManager cityManager;
@@ -17,6 +18,8 @@ namespace GRIDCITY
         private MeshFilter myMeshFilter;
         private Mesh myMesh;
         private Material myMaterial;
+       
+       
         #endregion
 
         #region Properties	
@@ -80,7 +83,7 @@ namespace GRIDCITY
 
             if (recursionLevel < maxLevel)          
             {
-                if (recursionLevel == maxLevel - 1)    //the next segment placed will be a roof
+                if (recursionLevel == maxLevel - 20)    //the next segment placed will be a roof
                 {
                     if (!cityManager.CheckSlot(x, y + 1, z))
                     {
@@ -103,9 +106,9 @@ namespace GRIDCITY
                         {
                             cityManager.SetSlot(x, y + 1, z, true);
                             child = Instantiate(treePrefab, transform.position + Vector3.up * 1.01f, Quaternion.identity, this.transform);                        
-                            int meshNum = myProfile.mainBlocks.Length;
-                            int matNum = myProfile.mainMaterials.Length;
-                            child.GetComponent<TreeTowerBlock>().Initialize(recursionLevel + 1, myProfile.mainMaterials[Random.Range(0, matNum)], myProfile.mainBlocks[Random.Range(0, meshNum)]);
+                            int meshNum = TreeProfile.mainBlocks.Length;
+                            int matNum = TreeProfile.mainMaterials.Length;
+                            child.GetComponent<TreeTowerBlock>().Initialize(recursionLevel + 1, TreeProfile.mainMaterials[Random.Range(0, matNum)], TreeProfile.mainBlocks[Random.Range(0, meshNum)]);
                         }
                     }
                     else                  //here we start branching off our tree tower
@@ -113,14 +116,14 @@ namespace GRIDCITY
                         //MODIFY THE CODE BELOW
 
                         random = Random.Range(0, 10);
-                        if ((random < 5) && (!cityManager.CheckSlot(x, y + 1, z)))
+                        if ((random < 5) && (!cityManager.CheckSlot(x, y + 5, z)))
                         {
-                            cityManager.SetSlot(x, y + 1, z, true);
-                            child = Instantiate(treePrefab, transform.position + Vector3.up * 1.01f, Quaternion.identity, this.transform);
+                            cityManager.SetSlot(x, y + 5, z, true);
+                            child = Instantiate(treePrefab, transform.position + Vector3.back * 1.01f, Quaternion.identity, this.transform);
                             int meshNum = myProfile.mainBlocks.Length;
                             int matNum = myProfile.mainMaterials.Length;
                             Debug.Log(child.GetComponents<TreeTowerBlock>().Length);
-                            child.GetComponent<TreeTowerBlock>().Initialize(recursionLevel + 1, myProfile.mainMaterials[Random.Range(0, matNum)], myProfile.mainBlocks[Random.Range(0, meshNum)]);
+                            child.GetComponent<TreeTowerBlock>().Initialize(recursionLevel + 5, myProfile.mainMaterials[Random.Range(0, matNum)], myProfile.mainBlocks[Random.Range(0, meshNum)]);
 
                         };
 
@@ -128,7 +131,7 @@ namespace GRIDCITY
                         if ((random < 5) && (!cityManager.CheckSlot(x, y + 1, z)))
                         {
                             cityManager.SetSlot(x, y + 1, z, true);
-                            child = Instantiate(treePrefab, transform.position + Vector3.up * 1.01f, Quaternion.identity, this.transform);
+                            child = Instantiate(treePrefab, transform.position + Vector3.down * 1.01f, Quaternion.identity, this.transform);
                             int meshNum = myProfile.mainBlocks.Length;
                             int matNum = myProfile.mainMaterials.Length;
                             Debug.Log(child.GetComponents<TreeTowerBlock>().Length);

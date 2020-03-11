@@ -64,9 +64,30 @@ namespace GRIDCITY
             }
 
             //BUILD CITY WALLS - add your code below
-            
-          
 
+
+           /*  //Code for wall building - nuke doesnt work if code implemented. uncomment for tree profile part 2
+            
+            for (int y = 6; y < 7; y++)
+            {
+                for (int g = -6; g < 6; g++)
+                {
+                    int random = Random.Range(0, profileArray.Length);
+                    Instantiate(wallProfile, new Vector3(y, 0.05f, g), Quaternion.identity).GetComponent<DeluxeTowerBlock>();
+                }
+
+                for (int h = 15; h < 16; h+=15)
+                {
+                    for (int k = -15; k < 15; k+= 15)
+                    {
+                        int random = Random.Range(0, profileArray.Length);
+                        Instantiate(wallProfile, new Vector3(h, 0.05f, k), Quaternion.identity).GetComponent<DeluxeTowerBlock>();
+                    }
+
+                }
+            }
+            */
+            
             //CITY BUILDINGS:
             
 			for (int i=-4;i<5;i+=2)

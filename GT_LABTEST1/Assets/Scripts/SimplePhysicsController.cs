@@ -23,6 +23,7 @@ public class SimplePhysicsController : MonoBehaviour
     public float speed = 5.0f;
     public float rotSpeed = 180.0f;
     public float rollResetSpeed = 0.5f;
+    public float altitude =30.0f;
 
     // Update is called once per frame
     void Update()
@@ -32,6 +33,15 @@ public class SimplePhysicsController : MonoBehaviour
         eInput = -Input.GetAxis("Elevate") * rotSpeed;
 
         if (transform.position.magnitude>20)
+        {
+            if (!nuked)
+            {
+                Instantiate(nuke, Vector3.zero, Quaternion.identity);
+                nuked = true;
+            }
+
+        }
+        else if(transform.position.magnitude > 30.0f)
         {
             if (!nuked)
             {

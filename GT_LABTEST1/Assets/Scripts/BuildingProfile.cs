@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/BuildingProfile", order = 100)]
 public class BuildingProfile : ScriptableObject
@@ -14,4 +15,8 @@ public class BuildingProfile : ScriptableObject
 
     public int maxHeight = 5;
 
+    internal object GetComponent<T>()
+    {
+        throw new NotImplementedException();
+    }
 }
